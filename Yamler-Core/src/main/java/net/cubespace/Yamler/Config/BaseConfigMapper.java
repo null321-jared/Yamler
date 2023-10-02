@@ -15,7 +15,6 @@ import org.yaml.snakeyaml.LoaderOptions;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.CustomClassLoaderConstructor;
 import org.yaml.snakeyaml.error.YAMLException;
-import org.yaml.snakeyaml.inspector.TrustedTagInspector;
 import org.yaml.snakeyaml.representer.Representer;
 
 /**
@@ -31,7 +30,6 @@ public class BaseConfigMapper extends BaseConfig {
 		dumperOptions.setIndent(2);
 		dumperOptions.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK);
 		LoaderOptions loaderOptions = new LoaderOptions();
-		loaderOptions.setTagInspector(new TrustedTagInspector());
 
 		Representer yamlRepresenter = new Representer(dumperOptions);
 		yamlRepresenter.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK);
@@ -154,7 +152,6 @@ public class BaseConfigMapper extends BaseConfig {
 
 			fileWriter.write(writeLines.toString());
 		} catch (IOException e) {
-			var b = e;
 			throw new InvalidConfigurationException("Could not save YML", e);
 		}
 	}
